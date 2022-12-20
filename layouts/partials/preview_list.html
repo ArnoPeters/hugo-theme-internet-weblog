@@ -1,6 +1,6 @@
 {{- $pages := .Pages -}}
 {{- if .IsHome -}}
-{{-   $pages = where .Site.RegularPages "Type" "in" (slice "microposts" "photos" "posts") -}}
+{{-   $pages = where .Site.RegularPages "Type" "in" (slice "microposts" "photos" "article") -}}
 {{- end -}}
 {{- $paginator := .Paginate $pages -}}
 {{- range .Paginator.Pages -}}
@@ -10,7 +10,7 @@
 {{-   else if or (eq .Type "photos") (eq .Type "photo") -}}
 {{-     partial "preview_photo_post.html" . -}}
 {{-   else -}}
-{{/*     if or (eq .Type "posts") (eq .Type "post") */}}
+{{/*     if or (eq .Type "articles") (eq .Type "article") */}}
 {{-     partial "preview_post.html" . -}}
 {{-   end -}}
 {{- end -}}

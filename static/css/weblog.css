@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* Page */
 
 body {
@@ -151,7 +152,6 @@ article.micropost {
 	text-align: justify;
 }
 
-.page>p,
 .post>p {
 	margin: 20px auto;
 }

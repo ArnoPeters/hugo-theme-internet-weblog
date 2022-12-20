@@ -13,11 +13,11 @@
     <img alt="{{ $.Text }}" srcset="
         {{ $small.RelPermalink }} 458w,
         {{ $medium.RelPermalink }} 726w,
-        {{ $large.RelPermalink }} 1200w" sizes="80vw" src="{{ $small.RelPermalink }}" />
-    <figcaption>{{ with $.Title | safeHTML }}{{ . }}{{ end }}</figcaption>
+        {{ $large.RelPermalink }} 1200w" sizes="80vw" src="{{ $small.RelPermalink }}" >
+		  {{ with $.Title | safeHTML }}<figcaption>{{ . }}</figcaption>{{ end }}
 {{-   else -}}
-    <img src="{{ .Destination | safeURL }}" alt="{{ $.Text }}"/>{{- end -}}
-    <figcaption>{{ with $.Title | safeHTML }}{{ . }}{{ end }}</figcaption>
+    <img src="{{ .Destination | safeURL }}" alt="{{ $.Text }}" >{{- end -}}
+    {{ with $.Title | safeHTML }}<figcaption>{{ . }}</figcaption>{{ end }}
 {{- else -}}
     <figcaption>TODO: Grab image '{{ $.Text }}'</figcaption>
 {{- end -}}

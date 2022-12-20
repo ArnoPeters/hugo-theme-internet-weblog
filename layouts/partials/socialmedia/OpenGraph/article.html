@@ -1,0 +1,14 @@
+<meta property="og:article:section" content="{{ .Section }}">
+<meta property="og:article:published_time" content="{{ .PublishDate }}">
+<meta property="og:article:modified_time" content="{{ .Lastmod }}">
+{{- with .ExpiryDate -}}<meta property="og:article:expiration_time" content="{{ . }}">{{- end -}}
+{{- with .Params.Author -}}
+{{- range . }}
+<meta property="og:article:author" content="{{ . }}">
+{{- end -}}
+{{- end -}}
+{{- with .Params.Tags -}}
+{{- range . }}
+<meta property="og:article:tag" content="{{ . }}">
+{{- end -}}
+{{- end -}}

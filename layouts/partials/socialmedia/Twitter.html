@@ -1,0 +1,16 @@
+<!-- Inspired by https://css-tricks.com/essential-meta-tags-social-media/ -->
+
+{{ if .Params.coverImage }}
+{{- $path:= "" -}}
+{{-   $matchedFile := .Page.Resources.GetMatch .Params.coverImage  -}}
+{{-   if $matchedFile  -}}
+{{-     $path = path.Join .Page.File.Dir .Params.coverImage -}}
+{{-   end  }}
+   <meta name="twitter:card" content="{{.Site.BaseURL}}{{ $path }}  ">
+   {{ with .Params.coverImageAlt }}<meta name="twitter:image:alt" content="{{ . }}">{{- end -}}
+{{- end }}
+{{- /* Inspired by https://css-tricks.com/essential-meta-tags-social-media/ */}}
+{{- with .Site.Params.twitter.handle }}
+{{- /*  Non-Essential, But Required for Analytics */}}
+   <meta name="twitter:site" content="@{{ . }}">
+{{- end -}}

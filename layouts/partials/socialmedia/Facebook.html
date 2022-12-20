@@ -1,0 +1,5 @@
+{{- /* Inspired by https://css-tricks.com/essential-meta-tags-social-media/ */ -}}
+{{- with .Site.Params.facebook.appid -}}
+{{- /*  Non-Essential, But Required for Analytics */ -}}
+<meta property="fb:app_id" content="{{ . }}" >
+{{- end -}}
