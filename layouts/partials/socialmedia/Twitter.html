@@ -1,13 +1,12 @@
-<!-- Inspired by https://css-tricks.com/essential-meta-tags-social-media/ -->
-
+{{- /* Inspired by https://css-tricks.com/essential-meta-tags-social-media/ */ -}}
+{{- /* https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/markup */ -}}
 {{ if .Params.coverImage }}
 {{- $path:= "" -}}
 {{-   $matchedFile := .Page.Resources.GetMatch .Params.coverImage  -}}
 {{-   if $matchedFile  -}}
 {{-     $path = path.Join .Page.File.Dir .Params.coverImage -}}
 {{-   end  }}
-   <meta name="twitter:card" content="{{.Site.BaseURL}}{{ $path }}  ">
-   {{ with .Params.coverImageAlt }}<meta name="twitter:image:alt" content="{{ . }}">{{- end -}}
+   <meta name="twitter:card" content="summary">  {{- /* summary_large_image */ -}}
 {{- end }}
 {{- /* Inspired by https://css-tricks.com/essential-meta-tags-social-media/ */}}
 {{- with .Site.Params.twitter.handle }}
