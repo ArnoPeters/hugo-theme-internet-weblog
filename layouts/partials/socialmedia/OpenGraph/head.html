@@ -26,6 +26,7 @@
 {{- end -}}
 {{- if $prefix -}}
 <head prefix="customOpenGraphNS: https://example.com/ns#">
+	<meta charset="utf-8"> {{- /* must be within first 1024 bytes */ -}}
    <meta property="og:type" content="customOpenGraphNS:{{ $type }}" >
 {{- else -}}
 <head>
