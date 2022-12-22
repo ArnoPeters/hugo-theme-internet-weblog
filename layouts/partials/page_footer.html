@@ -21,4 +21,7 @@
       {{ with .Site.Params.Author.location }} - Made in {{ . }}{{ end }}
     </div>
   {{ end }}
+  {{- if .IsHome -}}
+  {{- partial "socialmedia/Mastodon/verificationlink.html" . -}}
+  {{- end -}}
 </footer>
