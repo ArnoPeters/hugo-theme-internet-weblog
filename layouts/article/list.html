@@ -1,6 +1,7 @@
 {{ partial "site_header.html" . }}
 {{ partial "page_header.html" . }}
 
+{{ if gt  .WordCount 0 }}
   <main class="content">
 
     <article class="post">
@@ -26,8 +27,9 @@
       </p>
     </article>
 
-
+	 
   </main>
-
+{{ end }}
+  {{ partial "default_list.html" . }}
 {{ partial "page_footer.html" . }}
 {{ partial "site_footer.html" . }}

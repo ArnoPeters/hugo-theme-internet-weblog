@@ -1,3 +1,4 @@
+{{ .IsNode }}
 <article class="post">
 	{{ if (not (isset .Params "externalurl")) -}}
 	<h2><a rel="full-article" href="{{ .Permalink }}">{{ .Title }}</a></h2>
