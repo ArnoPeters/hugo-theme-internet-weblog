@@ -10,10 +10,10 @@
           {{ range .Pages }}
             <li>
               {{ if (not (isset .Params "externalurl")) }}
-                <a rel="full-article" href="{{ .Permalink }}">{{ .Title }}</a>
+                <a rel="full-article" href="{{ .Permalink }}">{{ .LinkTitle }}</a>
                 on <time datetime="{{ .Date }}" pubdate="">{{ .Date.Format "January 2" }}</time>
               {{ else }}
-                <a rel="remote-article" href="{{ .Params.externalurl }}">{{ .Title }} →</a>
+                <a rel="remote-article" href="{{ .Params.externalurl }}">{{ .LinkTitle }} →</a>
                 on
                 <a href="{{ .Permalink }}"> <time datetime="{{ .Date }}" pubdate="">{{ .Date.Format "January 2" }}</time> </a>
               {{ end }}

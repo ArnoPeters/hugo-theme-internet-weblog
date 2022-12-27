@@ -1,9 +1,16 @@
 @charset "UTF-8";
 /* Page */
 
+html,
 body {
 	font: 16px/24px "Avenir Next", "Helvetica Neue", Arial, Helvetica, sans-serif;
 	line-height: 24px;
+	height: 100%;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
 }
 
 a[href] {
@@ -13,6 +20,11 @@ a[href] {
 
 a:hover {
 	text-decoration: underline;
+}
+
+main {
+	flex: auto;
+	overflow: auto;
 }
 
 h1,
@@ -50,8 +62,15 @@ blockquote p:last-child {
 	margin: 0;
 }
 
+body.site {
+    max-height: ;
+}
+
+max {}
+
 .content {
 	flex: 1;
+	max-height: ;
 }
 
 /* Header */
@@ -133,6 +152,35 @@ article.micropost {
 .post-groups {
 	margin: 40px auto;
 	max-width: 1020px;
+}
+
+nav.post {
+	display: block;
+	width: 100%;
+	margin:0px auto;
+}
+
+nav.post ul {
+	margin: 0px;
+	padding: 0px;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+}
+
+nav.post li {
+	width: 33%;
+	float: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+nav.post li.series-prev {
+	text-align: left;
+}
+
+nav.post li.series-next {
+	text-align: right;
 }
 
 .micropost>p {

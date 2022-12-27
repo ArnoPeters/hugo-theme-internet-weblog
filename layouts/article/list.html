@@ -1,15 +1,11 @@
 {{ partial "site_header.html" . }}
 {{ partial "page_header.html" . }}
 
-{{ if gt  .WordCount 0 }}
+{{ if .Content }}
   <main class="content">
 
     <article class="post">
-      {{ if (not (isset .Params "externalurl")) }}
-        <h2><a rel="full-article" href="{{ .Permalink }}">{{ .Title }}</a></h2>
-      {{ else }}
-        <h2><a rel="remote-article" href="{{ .Params.externalurl }}">→ {{ .Title }}</a> <a href="{{ .Permalink }}">∞</a></h2>
-      {{ end }}
+        <h2>{{- if .IsNode -}}Series: {{ end -}}{{ .Title }}</h2>
 
       <div class="postmeta">Posted on <time datetime="{{ .Date }}" pubdate="">{{ .Date.Format "January 2, 2006" }}</time>{{- if eq hugo.Environment "development" }} wordcount: {{- .WordCount -}}{{- end -}}
 			{{ with .Params.Categories }}
@@ -28,8 +24,15 @@
     </article>
 
 	 
-  </main>
+  
+	{{- range .Pages.Reverse -}}
+	{{-   $url := replace .Permalink .Site.BaseURL "" -}}
+	{{-     partial "preview_post.html" . -}}
+	{{- end -}}
+	</main>
+{{ else }}	
+{{ partial "default_list.html" . }}
 {{ end }}
-  {{ partial "default_list.html" . }}
+  
 {{ partial "page_footer.html" . }}
 {{ partial "site_footer.html" . }}
