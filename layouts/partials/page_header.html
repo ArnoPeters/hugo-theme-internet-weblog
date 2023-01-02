@@ -6,6 +6,7 @@
 			{{ $.Scratch.Add "sections" .Site.Params.rsssections }}
 			<ul>
 				{{ range .Site.Menus.main }}
+				{{ if os.FileExists .Identifier }}
 				<li>
 					<a href="{{.URL}}">{{ .Name }}</a>
 					{{ if in ($.Scratch.Get "sections") .Name }}
@@ -13,14 +14,17 @@
 					{{ end }}
 				</li>
 				{{ end }}
+				{{ end }}
 				{{ with .Site.Params.Author.aboutpage }}<li><a href="{{ . }}">About</a></li>{{ end }}
 			</ul>
 		{{ else }}
 			<ul>
 				{{ range .Site.Menus.main }}
+				{{ if os.FileExists .Identifier }}
 				<li>
 					<a href="{{.URL}}">{{ .Name }}</a>
 				</li>
+				{{ end }}
 				{{ end }}
 				{{ with .Site.Params.Author.aboutpage }}<li><a href="{{ . }}">About</a></li>{{ end }}
 			</ul>
