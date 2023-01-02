@@ -1,0 +1,27 @@
+		<div class="postmeta">Posted on <time datetime="{{ .PublishDate }}" pubdate="">{{ .Date.Format "January 2, 2006"
+			}}</time>
+		{{ with .Params.Categories -}}
+		in
+		<span class="categories">
+			{{ range $i, $v := . }}
+			<a class="category" href="/categories/{{ $v | urlize }}">{{ $v }}</a>{{ if ne (len $.Params.Categories) (add
+			$i 1) }}, {{ end }}
+			{{ end -}}
+		</span>
+		{{ end -}}
+		{{ with .Translations -}}
+		<span class="translations">
+			also in
+			{{ range . -}}
+			<a class="translation" href="{{ .Permalink }}">{{ .Lang }}</a>
+			{{ end -}}
+		</span>
+		{{ end -}}
+	</div>
+	<p>
+		{{  .Summary }}
+	</p>
+	{{ if .Truncated }}
+	<a class="continue" rel="full-article" href="{{ .Permalink }}">Continue Reading »</a>  
+	{{ end }}	
+	
