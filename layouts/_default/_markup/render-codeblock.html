@@ -16,9 +16,10 @@
 {{-   $filePath = .Attributes.file -}} 
 {{-   $matchedFile := .Page.Resources.GetMatch $filePath -}}
 {{-   if and (not $matchedFile) .Page.File -}}
-{{-     $filePath = path.Join .Page.File.Dir $filePath -}}
+{{-     $filePath = printf "/%s"  (path.Join .Page.File.Dir $filePath) -}}
 {{-     $data = ($filePath | readFile) -}}
 {{-   else -}}
+{{-     $filePath = $matchedFile.Permalink -}}
 {{-     $data = $matchedFile.Content -}}
 {{-   end -}}
 {{-   if .Attributes.filelines -}}
@@ -57,5 +58,5 @@
   <pre><code class="{{- $class -}}">{{- $data -}}</code></pre>
 {{- end -}}
 {{- if and .Attributes.file (eq .Attributes.allowdownload true) -}}
-<a href="/{{- $filePath -}}" download="{{- cond (ne .Attributes.downloadas nil) .Attributes.downloadas .Attributes.file -}}">Download file</a>
+<a href="{{- $filePath -}}" download="{{- cond (ne .Attributes.downloadas nil) .Attributes.downloadas .Attributes.file -}}">Download file</a>
 {{- end -}}
