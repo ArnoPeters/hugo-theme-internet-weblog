@@ -1,17 +1,2 @@
-<article class="post">
-	<h2>
-		<a href="{{ .Permalink }}">{{- if .IsNode -}}Series: {{ end -}}{{ .Title }}</a></h2>
-	{{- partial "preview_post_summary.html" . -}}
-	{{ if .IsNode }}
-	{{  with .CurrentSection.Pages }}
-	<h3>Articles in series:</h3>
-	<ul>
-	{{ range .Reverse}}
-	<li>
-		<a href="{{ .Permalink }}">{{ .LinkTitle }}</a>
-   </li>
-	{{ end }}
-  </ul>	
-  {{ end }}
-{{- end -}}
-</article>
+
+

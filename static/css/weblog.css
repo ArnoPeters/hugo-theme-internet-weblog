@@ -62,15 +62,8 @@ blockquote p:last-child {
 	margin: 0;
 }
 
-body.site {
-    max-height: ;
-}
-
-max {}
-
 .content {
 	flex: 1;
-	max-height: ;
 }
 
 /* Header */
@@ -157,7 +150,9 @@ article.micropost {
 nav.post {
 	display: block;
 	width: 100%;
-	margin:0px auto;
+	margin: 0px auto;
+	border-bottom: 1px solid #476286;
+	border-top: 1px solid #476286;
 }
 
 nav.post ul {
@@ -169,17 +164,45 @@ nav.post ul {
 }
 
 nav.post li {
-	width: 33%;
+   xwidth: 50%;
 	float: none;
 	margin: 0px;
 	padding: 0px;
 }
 
-nav.post li.series-prev {
+nav.post li.prev {
 	text-align: left;
 }
 
-nav.post li.series-next {
+nav.post li.prev a::before {
+	content: "« ";
+}
+
+nav.post li.prev a {
+	margin-right:.5em;
+}
+
+
+li.prev-article,
+li.series-prev-chapter,
+li.series-prev-article {
+	text-align: left;
+}
+
+nav.post li.next {
+	text-align: right;
+}
+
+nav.post li.next a {
+	margin-left:.5em;
+}
+nav.post li.next a::after {
+	content: " »";
+}
+
+li.next-article,
+li.series-next-chapter,
+li.series-next-article {
 	text-align: right;
 }
 

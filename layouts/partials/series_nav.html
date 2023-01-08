@@ -1,21 +1,8 @@
-{{- if or .PrevInSection .NextInSection -}}
+{{ if not .Parent.IsHome }}
 <nav class="post">
 	<ul>
-		<li class="series-prev">
-			{{- with .PrevInSection -}}
-			<a href="{{ .Permalink }}">« {{ .LinkTitle -}}</a>
-			{{- end -}}
-		</li>
-		<li class="series-root">
-			{{- if ne .CurrentSection .FirstSection -}}
-			<a href="{{ .Parent.Permalink }}">Part of series "{{- .Parent.LinkTitle -}}"</a>
-			{{- end -}}
-		</li>
-		<li class="series-next">
-			{{- with .NextInSection -}}
-			<a href="{{ .Permalink }}">{{- .LinkTitle }} »</a>
-			{{- end -}}
-		</li>
+		{{ partial "series_nav_prev.html" . }}
+		{{ partial "series_nav_next.html" . }}
 	</ul>
 </nav>
-{{- end -}}
+{{ end }}

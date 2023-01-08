@@ -1,10 +1,41 @@
 {{- $pages := .Pages -}}
 {{- if .IsHome -}}
-{{-   $pages = where .Site.RegularPages "Type" "in" (slice "article") -}}
+{{- $pages = where .Site.Pages "Type" "in" (slice "article") -}}
+{{- $pages = where $pages "Parent.IsHome" "ne" true -}}
 {{- end -}}
 {{- $paginator := .Paginate $pages -}}
+{{- $page := . -}}
 {{- range .Paginator.Pages -}}
-{{-   $url := replace .Permalink .Site.BaseURL "" -}}
-{{-     partial "preview_post.html" . -}}
+{{- $url := replace .Permalink .Site.BaseURL "" -}}
+
+<article class="post">
+	<h2>
+
+		{{ with .Parent }}
+		{{ if .Parent }}
+		{{ if not .Parent.IsHome }}
+		<a href="{{ .Permalink }}">{{- if .IsNode -}}Series: {{ end -}}{{ .Title }}</a> -
+		{{ end }}
+		{{ end }}
+		{{ end }}
+
+
+		<a href="{{ .Permalink }}">{{- if .IsNode -}}Series: {{ end -}}{{ .Title }}</a>
+	</h2>
+	{{- partial "preview_post_summary.html" . -}}
+	{{ if and .IsNode (not $page.IsHome ) }}
+	{{ with .CurrentSection.Pages }}
+	<h3>Articles in series:</h3>
+	<ul>
+		{{ range .Reverse}}
+		<li>
+			<a href="{{ .Permalink }}">{{ .LinkTitle }}</a>
+		</li>
+		{{ end }}
+	</ul>
+	{{ end }}
+	{{- end -}}
+</article>
+
 {{- end -}}
 {{- partial "pagination.html" . -}}

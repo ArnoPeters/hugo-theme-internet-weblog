@@ -1,0 +1,51 @@
+{{- $link:= "" -}}
+{{- $linkTitle:= "" -}}
+{{- $seriesLink:= ""}}
+{{- $seriesLinkTitle:= ""}}
+{{- $linkClass:= "prev-article" -}}
+{{- with .Parent.Pages.Prev . -}}
+<!-- if there is a previous page for this -->
+{{- if ne .CurrentSection .FirstSection -}}
+<!-- series subpost or prev article-->
+{{- $link = .Permalink -}}
+{{- $linkTitle = .LinkTitle -}}
+{{- if not .IsNode -}}
+{{- $seriesLink = .Parent.Permalink -}}
+{{- $seriesLinkTitle = .Parent.LinkTitle -}}
+{{- $linkClass = "series-prev-chapter" -}}
+{{- end -}}
+{{- else -}}
+{{- if not .IsNode -}}
+{{- if not .Parent.IsHome -}}
+<!-- series root page link to prev -->
+{{- $link = .Permalink -}}
+{{- $linkTitle = .LinkTitle -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}
+{{- else -}}
+<!-- if there is no previous page, and it has a parent that is not the root list -->
+{{- if not .IsNode -}}
+{{- if ne .CurrentSection .FirstSection -}}<!-- if not root list page -->
+<!-- series link back to parent as first node in series -->
+{{- $link = .Parent.Permalink -}}
+{{- $linkTitle = .Parent.LinkTitle -}}
+{{- $linkClass = "series-prev-chapter" -}}
+{{- else -}}
+<!-- no more pages, link back to Articles-->
+{{- with .Parent -}}
+{{- $link = .Permalink -}}
+{{- $linkTitle = .LinkTitle -}}
+{{- $linkClass = "" -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}
+<li class="prev {{ $linkClass -}}">
+	{{- if $link}}
+	<a href="{{- $link -}}">{{ $linkTitle }}</a>
+	{{- end }}
+	{{- if $seriesLink -}}
+	<a href="{{- $seriesLink -}}">{{ $seriesLinkTitle }}</a>
+	{{- end -}}
+</li>
