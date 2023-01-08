@@ -1,8 +1,8 @@
 <header>
-  <nav>
-    <h1><a href="/">{{ .Site.Title }}</a></h1>
-    <div class="menu">
-		{{ if isset .Site.Params "rsssections" }}
+	<nav>
+		<h1><a href="/">{{ .Site.Title }}</a></h1>
+		<div class="menu">
+			{{ if isset .Site.Params "rsssections" }}
 			{{ $.Scratch.Add "sections" .Site.Params.rsssections }}
 			<ul>
 				{{ range .Site.Menus.main -}}
@@ -10,17 +10,17 @@
 				<li>
 					<a href="{{.URL}}">{{ .Name }}</a>
 					{{ if in ($.Scratch.Get "sections") .Name }}
-						<a href="{{.URL}}index.xml"><img src="/img/rss.svg" class="rss-icon" /></a>
+					<a href="{{.URL}}index.xml"><img src="/img/rss.svg" class="rss-icon" /></a>
 					{{ end }}
 				</li>
 				{{ end -}}
 				{{- end -}}
 				{{ with .Site.Params.Author.aboutpage }}<li><a href="{{ . }}">About</a></li>{{ end }}
 			</ul>
-		{{ else }}
+			{{ else }}
 			<ul>
 				{{ range .Site.Menus.main -}}
-				{{- if os.FileExists .Identifier -}}
+				{{if gt (len ($.Site.GetPage .URL ).Pages) 0 }}
 				<li>
 					<a href="{{.URL}}">{{ .Name }}</a>
 				</li>
@@ -28,7 +28,7 @@
 				{{- end }}
 				{{ with .Site.Params.Author.aboutpage }}<li><a href="{{ . }}">About</a></li>{{ end }}
 			</ul>
-      	{{ end }}
-    </div>
-  </nav>
+			{{ end }}
+		</div>
+	</nav>
 </header>
