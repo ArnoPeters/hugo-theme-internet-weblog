@@ -1,0 +1,10 @@
+{{- $filePath := .Get 0 -}} 
+{{- .Page.Resources.GetMatch $filePath -}}
+{{- $matchedFile := .Page.Resources.GetMatch $filePath -}}  
+{{- if and (not $matchedFile) .Page.File -}}
+{{-   path.Join .Page.File.Dir $filePath | readFile -}}
+{{- else -}}
+{{-   with $matchedFile -}}
+{{-    .Content -}}
+{{-   end -}}
+{{- end -}}

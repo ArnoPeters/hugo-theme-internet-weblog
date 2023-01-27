@@ -1,0 +1,19 @@
+{{ partial "site_header.html" . }}
+{{ partial "page_header.html" . }}
+
+<main class="content list">
+	{{ partial "article_content.html" . }}
+	{{- $pages := .Pages -}}
+	{{- $paginator := .Paginate $pages -}}
+	{{- range .Paginator.Pages -}}
+	{{- $url := replace .Permalink .Site.BaseURL "" -}}
+	<article class="post">
+		<h2>
+			<a href="{{ .Permalink }}">{{ .Title }}</a></h2>
+		{{- partial "preview_post_summary.html" . -}}
+	</article>
+	{{- end -}}
+	{{- partial "pagination.html" . -}}
+</main>
+{{ partial "page_footer.html" . }}
+{{ partial "site_footer.html" . }}

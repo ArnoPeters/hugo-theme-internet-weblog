@@ -1,12 +1,11 @@
 ---
 draft: true
-slug: "{{lower (replace .Name " " "-") }}"
 author: ["{{ with .Site.Params.Author.firstname }}{{ . }}{{ end }} {{ with .Site.Params.Author.lastname }}{{ . }}{{ end }}"]
 title: "{{ replace .Name "-" " " | title }}"
-summary: "TODO: Write summary"
-tags: [] # "string", "string", ...
-date: {{ .Date }}
-publishdate: {{ .Date }}
+tags: [] # "string", "string", ... 
+date: {{ dateFormat "2006-01-02" .Date }}
+publishdate:  {{ dateFormat "2006-01-02" .Date }}
 ---
 
-TODO: Write contents
+TODO: Write SERIES intro
+<!--more-->
