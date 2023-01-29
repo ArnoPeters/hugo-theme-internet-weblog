@@ -1,13 +1,10 @@
 {{- /* 
-   Attributes: 
-	   file            : The code file to display
-	   highlightjs     : A highlight.js compatible highlight range. 1,2-3|4-5 -> | is for animation.
-	   fileLines       : Range. Starting line, optional ending line (or eof by default) string "linenumber" / "linenumber-linenumber"
-
+   Attributes:
+      file            : The code file to display
+		highlightjs     : A highlight.js compatible highlight range. 1,2-3|4-5 -> | is for animation.
+		fileLines       : Range. Starting line, optional ending line (or eof by default) string "linenumber" / "linenumber-linenumber"
 	Docs about hugo code block render hooks: https://gohugo.io/templates/render-hooks/#render-hooks-for-code-blocks
 */ -}}
-{{ .Attributes }}
-{{ .Options }}
 {{- $filePath:= "" -}}
 {{- $adjustedOptions:= .Options -}}
 {{- $startIndex:= 1 -}}
@@ -46,8 +43,8 @@
 {{-   end -}}
 {{- end -}}
 {{- $adjusted_hl_lines:= "" -}}
-{{- $highlightLineShift:= sub $prefaceLen $startIndex -}}
 {{- if .Attributes.highlightjs -}}
+{{- $highlightLineShift:= sub $prefaceLen $startIndex -}}
 {{-   $textPipe:= "" -}}
 {{-   $sepPipe:= "" -}}
 {{-   range (split .Attributes.highlightjs  "|") -}}
@@ -69,6 +66,7 @@
 {{-   end -}}
 {{-   $adjusted_hl_lines = $textPipe -}}
 {{- else if $adjustedOptions.hl_lines -}}
+{{-   $highlightLineShift:= sub ( add $prefaceLen 1 ) $startIndex -}}
 {{-   $sep:= "" -}}
 {{-   range  $adjustedOptions.hl_lines -}} 
 {{-     $adjusted_hl_lines = printf "%s%s%d-%d"  $adjusted_hl_lines $sep (add (index . 0) $highlightLineShift) (add (index . 1) $highlightLineShift) -}}
