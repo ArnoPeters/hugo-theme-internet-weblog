@@ -10,7 +10,8 @@
 {{- $filePath:= "" -}}
 {{- $adjustedOptions:= .Options -}}
 {{- $startIndex:= 1 -}}
-{{- $prefaceLen:= 1 -}}
+{{- $prefaceLen:= 0 -}}
+{{- $lineStart:= 0 -}}
 {{- if .Attributes.filelines -}}
 {{-   if  .Inner  -}}
 {{-     $prefaceLen = ((split .Inner "\n") | len) -}}
@@ -19,7 +20,9 @@
 {{-   end -}}
 {{- end -}}
 {{- $data:= .Inner -}}  
+{{- $fileShift:= 1 -}}  
 {{- if .Attributes.file -}}
+{{-   $fileShift = 0 -}}  
 {{-   $filePath = .Attributes.file -}} 
 {{-   $matchedFile := .Page.Resources.GetMatch $filePath -}}
 {{-   if and (not $matchedFile) .Page.File -}}
@@ -43,10 +46,14 @@
 {{-   if ne $prefaceLen 0 -}}
 {{-     $data = printf "%s\n%s" .Inner $data -}}
 {{-   end -}}
+{{- else -}}
+{{-   if .Options.linenostart -}}
+{{-     $startIndex = int .Options.linenostart -}}
+{{-   end -}}
 {{- end -}}
 {{- $adjusted_hl_lines:= "" -}}
 {{- if .Attributes.highlightjs -}}
-{{- $highlightLineShift:= sub $prefaceLen $startIndex -}}
+{{-   $highlightLineShift:= sub (add $prefaceLen $fileShift ) $startIndex -}}
 {{-   $textPipe:= "" -}}
 {{-   $sepPipe:= "" -}}
 {{-   range (split .Attributes.highlightjs  "|") -}}
@@ -67,9 +74,10 @@
 {{-       $sepPipe = "|" -}} 
 {{-   end -}}
 {{-   $adjusted_hl_lines = $textPipe -}}
+{{-   $lineStart = add (sub $startIndex  $prefaceLen) (sub 1 $fileShift) }}
 {{- else if $adjustedOptions.hl_lines -}}
-{{-   $startIndex = int .Options.linenostart -}}
-{{-   $highlightLineShift:= sub ( add $prefaceLen 1 ) $startIndex -}}
+{{-   $highlightLineShift:= sub (add $fileShift ( add $prefaceLen 1) ) $startIndex -}}
+{{-   $lineStart = $startIndex -}}
 {{-   $sep:= "" -}}
 {{-   range  $adjustedOptions.hl_lines -}} 
 {{-     $adjusted_hl_lines = printf "%s%s%d-%d"  $adjusted_hl_lines $sep (add (index . 0) $highlightLineShift) (add (index . 1) $highlightLineShift) -}}
