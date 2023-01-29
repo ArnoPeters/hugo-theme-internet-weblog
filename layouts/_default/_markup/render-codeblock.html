@@ -98,3 +98,4 @@
 {{- if and .Attributes.file (eq .Attributes.allowdownload true) -}}
 <a href="{{- $filePath -}}" download="{{- cond (ne .Attributes.downloadas nil) .Attributes.downloadas .Attributes.file -}}">Download file</a>
 {{- end -}}
+{{- /* TODO: add "view raw" and improve download -> the block is currently just appended with an <A>, could be better */ -}}
