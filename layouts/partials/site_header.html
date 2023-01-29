@@ -1,22 +1,14 @@
 <!DOCTYPE html>
 <html lang="{{ with .Site.LanguageCode }}{{ . }}{{ else }}en-US{{ end }}">
-	
-{{ partial "socialmedia/OpenGraph/head.html" . }}
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {{ with .Site.Params.Author.FullName }}<meta name="author" content="{{ . }}">{{ end }}
-    {{ with .Description }}<meta name="description" content="{{ . }}">{{ end }}
-	 {{ partial "socialmedia/Twitter.html" . -}}
-    {{ hugo.Generator -}}
-    {{ $.Scratch.Add "title" .Site.Title }}
-    <!-- <title>{{ with .Title }}{{ if ne . ($.Scratch.Get "title") }}{{ . }} &middot; {{ end }}{{ end }}@{{ .Site.Params.Author.handle }}’s {{ .Site.Title }}</title> -->
-	 <title>{{ with .Title }}{{ if ne . ($.Scratch.Get "title") }}{{ . }} &middot; {{ end }}{{ end }}@{{ .Site.Title }}</title>
-    <link rel="stylesheet" href="{{.Site.BaseURL}}css/weblog.css" media="screen">
-    {{ if (isset .Site.Params.Author "flickrid")  -}}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.2.14/css/lightgallery.min.css" type="text/css" >
-    {{ end }}
-    {{ partial "custom_stylesheets.html" . -}}
-    {{ if .Site.Params.rssenabled -}}
-    <link href="{{.Site.RSSLink}}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" >
-    {{ end }}
-  </head>
-  <body class="site">
+   {{ partial "metadata/head.html" . }}
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      {{- $.Scratch.Add "title" .Site.Title -}}
+      <!-- <title>{{ with .Title }}{{ if ne . ($.Scratch.Get "title") }}{{ . }} &middot; {{ end }}{{ end }}@{{ .Site.Params.Author.handle }}’s {{ .Site.Title }}</title> -->
+      <title>{{ with .Title }}{{ if ne . ($.Scratch.Get "title") }}{{ . }} &middot; {{ end }}{{ end }}@{{ .Site.Title }}</title>
+      <link rel="stylesheet" href="{{.Site.BaseURL}}css/weblog.css" media="screen">
+      {{- partial "custom_stylesheets.html" . }}
+      {{- if .Site.Params.rssenabled }}
+         <link href="{{.Site.RSSLink}}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" >
+      {{- end }}
+   </head>
+   <body class="site">

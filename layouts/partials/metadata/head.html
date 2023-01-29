@@ -1,0 +1,12 @@
+{{- partial "metadata/OpenGraph/head.html" . }}
+      {{ hugo.Generator }}
+{{- if .Params.robotsNoIndex }}
+      <meta name="robots" content="noindex" />
+{{- end }}
+{{- with .Site.Params.Author.FullName }}
+      <meta name="author" content="{{ . }}">
+{{- end }}
+{{- with .Description }}
+      <meta name="description" content="{{ . }}">
+{{- end }}
+{{- partial "metadata/Twitter.html" . }}
