@@ -30,5 +30,3 @@ TODO: speaker notes
 - wat is de conclusie die ik eruit kan trekken
 
 {{% /reveal-hugo/note %}}
-
-TODO: iets doen met {{ if .Params.Private }} <meta name="robots" content="noindex" /> {{ end }}
