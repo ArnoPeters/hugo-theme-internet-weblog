@@ -2,9 +2,7 @@
 <html lang="{{ with .Site.LanguageCode }}{{ . }}{{ else }}en-US{{ end }}">
    {{ partial "metadata/head.html" . }}
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      {{- $.Scratch.Add "title" .Site.Title -}}
-      <!-- <title>{{ with .Title }}{{ if ne . ($.Scratch.Get "title") }}{{ . }} &middot; {{ end }}{{ end }}@{{ .Site.Params.Author.handle }}’s {{ .Site.Title }}</title> -->
-      <title>{{ with .Title }}{{ if ne . ($.Scratch.Get "title") }}{{ . }} &middot; {{ end }}{{ end }}@{{ .Site.Title }}</title>
+      <title>{{ with .Title }}{{ if ne . $.Site.Title }}{{ . }} &middot; {{ end }}@{{ end }}{{ .Site.Title }}</title>
       <link rel="stylesheet" href="{{.Site.BaseURL}}css/weblog.css" media="screen">
       {{- partial "custom_stylesheets.html" . }}
       {{- if .Site.Params.rssenabled }}
