@@ -8,8 +8,8 @@
 {{- $adjustedOptions:= .Options -}}
 {{- $startIndex:= 0 -}}
 {{- $prefaceLen:= 0 -}}
-{{- if .Inner -}}
-{{-   $prefaceLen = ((split .Inner "\n") | len) -}}
+{{- if and .Attributes.filelines .Inner -}}
+{{-     $prefaceLen = ((split .Inner "\n") | len) -}}
 {{- end -}}
 {{- $data:= .Inner -}}  
 {{- if .Attributes.file -}}
