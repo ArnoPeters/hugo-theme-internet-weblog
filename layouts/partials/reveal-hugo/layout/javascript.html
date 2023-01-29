@@ -1,7 +1,6 @@
 <!-- polyfill needed for IE11 and below -->
 <script type="text/javascript" src={{- "lib/reveal-hugo/object-assign.js" | relURL -}}></script>
-<!--TODO fix print and pdf -->
-Printing and PDF exports
+<!-- TODO fix print and pdf exports - fonts and stuff is not all copied to print -->
 <!-- use Hugo to create the right path for the print stylesheet, then conditionally include it -->
 {{- $reveal_location := $.Param "reveal_hugo.reveal_cdn" | default "lib/reveal-js" -}}
 <a href="{{- printf "%s/print/" $reveal_location | relURL -}}" id="print-location" style="display: none;"></a>
