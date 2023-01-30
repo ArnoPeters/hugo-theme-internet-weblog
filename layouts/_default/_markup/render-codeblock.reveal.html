@@ -20,7 +20,6 @@
 {{- $data:= .Inner -}}  
 {{- $fileShift:= 1 -}}  
 {{- if .Attributes.file -}}
-{{-   $fileShift = 0 -}}  
 {{-   $filePath = .Attributes.file -}} 
 {{-   $matchedFile := .Page.Resources.GetMatch $filePath -}}
 {{-   if and (not $matchedFile) .Page.File -}}
@@ -30,6 +29,7 @@
 {{-     $data = $matchedFile.Content -}}
 {{-   end -}}
 {{-   if .Attributes.filelines -}}
+{{-     $fileShift = 0 -}}  
 {{-     $datalines :=  split $data "\n" -}}
 {{-     $values:= split .Attributes.filelines "-" -}}
 {{-     $start:=  (int (index $values 0)) -}}
