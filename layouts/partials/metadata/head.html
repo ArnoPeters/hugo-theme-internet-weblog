@@ -3,8 +3,12 @@
 {{- if .Params.robotsNoIndex }}
       <meta name="robots" content="noindex" />
 {{- end }}
-{{- with .Site.Params.Author.FullName }}
+{{- with .Params.Author }}
+       <meta name="author" content="{{ . }}">
+{{- else -}}		 
+  {{- with .Site.Params.Author.FullName }}
       <meta name="author" content="{{ . }}">
+  {{- end }}
 {{- end }}
 {{- with .Description }}
       <meta name="description" content="{{ . }}">
