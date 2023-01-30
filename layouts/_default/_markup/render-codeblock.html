@@ -11,7 +11,7 @@
 {{- $adjustedOptions:= .Options -}}
 {{- $startIndex:= 1 -}}
 {{- $prefaceLen:= 0 -}}
-{{- $lineStart:= 0 -}}
+{{- $lineStart:= 1 -}}
 {{- if .Attributes.filelines -}}
 {{-   if  .Inner  -}}
 {{-     $prefaceLen = ((split .Inner "\n") | len) -}}
