@@ -9,7 +9,7 @@
 {{- $url := replace .Permalink .Site.BaseURL "" -}}
 
 <article class="post">
-	<h2>
+	<h1>
 
 		{{ with .Parent }}
 		{{ if .Parent }}
@@ -21,11 +21,11 @@
 
 
 		<a href="{{ .Permalink }}">{{- if .IsNode -}}Series: {{ end -}}{{ .Title }}</a>
-	</h2>
+	</h1>
 	{{- partial "preview_post_summary.html" . -}}
 	{{ if and .IsNode (not $page.IsHome ) }}
 	{{ with .CurrentSection.Pages }}
-	<h3>Articles in series:</h3>
+	<h2>Articles in series:</h2>
 	<ul>
 		{{ range .Reverse}}
 		<li>
