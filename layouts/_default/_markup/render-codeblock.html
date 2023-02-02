@@ -81,7 +81,7 @@
 {{-   $sep:= "" -}}
 {{-   range  $adjustedOptions.hl_lines -}} 
 {{-     $adjusted_hl_lines = printf "%s%s%d-%d"  $adjusted_hl_lines $sep (add (index . 0) $highlightLineShift) (add (index . 1) $highlightLineShift) -}}
-{{-     $sep = "," -}}
+{{-     $sep = " " -}}
 {{-   end -}}
 {{- end -}}
 {{- $adjustedOptions = merge $adjustedOptions (dict "hl_lines" $adjusted_hl_lines) -}}
