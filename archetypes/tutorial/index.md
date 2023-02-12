@@ -19,14 +19,27 @@ _WHY are we doing WHAT in 2 or 3 sentences. Think about what process or workflow
 
 <!--more-->
 
-# Prerequisites
+Why
 
-- Uses ... 
-- Uses ...
-Skip to actual [implementation](#implementation)
+When
 
-## Preparations
+How To
+
+Possible choices
+Pro and Cons
+Chosen one
+
+## Starting point (Implementation)
+Step-by-step
+- bricks n pieces
+- final product
+
+# Prerequisites & preparations
+
+- Uses ... (how to verify you have this in the correct version) . Install / upgrade
+- Uses ... (how to verify you have this in the correct version) . Install / upgrade200200000000000000000000
 TODO: Preparations (when starting from scratch)
+
 
 ## Implementation
 TODO: actual implementation
