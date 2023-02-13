@@ -5,7 +5,7 @@ author: ["{{ with .Site.Params.Author.firstname }}{{ . }}{{ end }} {{ with .Site
 title: "{{ replace .Name "-" " " | title }}"  # TODO: Article: Check title. What is the page about in 60-64 characters?
 description: "" # TODO: Article: Write Description. Call to Action including Primary Keyword & Secondary Keyword in max 130 characters
                 # https://www.metatags.org/all-meta-tags-overview/the-important-meta-tags/meta-name-description/
-#summary: ""
+#summary: "" #TODO: only use when <!--more--> is not used
 tags: [] # "string", "string", ... # TODO: Article: Write Tags
 date: {{ .Date }}
 publishdate: {{ .Date }}

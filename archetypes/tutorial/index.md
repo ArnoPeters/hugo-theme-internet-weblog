@@ -5,13 +5,14 @@ author: ["{{ with .Site.Params.Author.firstname }}{{ . }}{{ end }} {{ with .Site
 title: "{{ replace .Name "-" " " | title }}"  # TODO: Tutorial: Check title. What is the page about in 60-64 characters?
 description: "" # TODO: Tutorial: Write Description. Call to Action including Primary Keyword & Secondary Keyword in max 130 characters
                 # https://www.metatags.org/all-meta-tags-overview/the-important-meta-tags/meta-name-description/
-#summary: ""
-tags: [] # "string", "string", ... # TODO: Tutorial: Write Tags
+#summary: "" #TODO: only use when <!--more--> is not used
+
 date: {{ .Date }}
 publishdate: {{ .Date }}
 #coverImage: "cover.png"
 #coverImageAlt: "cover alt Text"
-categories: ["Tutorial"]
+tags: [] # "string", "string", ... # TODO: Tutorial: Write Tags
+categories: ["Tutorial"] # TODO: Tutorial: Write Tags
 ---
 
 TODO: Tutorial. Write Summary. 
@@ -29,10 +30,6 @@ Possible choices
 Pro and Cons
 Chosen one
 
-## Starting point (Implementation)
-Step-by-step
-- bricks n pieces
-- final product
 
 # Prerequisites & preparations
 
@@ -40,9 +37,10 @@ Step-by-step
 - Uses ... (how to verify you have this in the correct version) . Install / upgrade200200000000000000000000
 TODO: Preparations (when starting from scratch)
 
-
-## Implementation
-TODO: actual implementation
+## Starting point (Implementation)
+Step-by-step
+- bricks n pieces
+- final product
 
 ## Conclusion
 TODO: Lessons learned
