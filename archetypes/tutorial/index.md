@@ -19,28 +19,21 @@ categories: ["Tutorial"] # TODO: Tutorial: Write Tags
 ---
 
 TODO: Tutorial. Write Summary. 
-_WHY are we doing WHAT in 2 or 3 sentences. Think about what process or workflow is made possible, and the summary of what steps will be taken to do so._
+_What problem are we solving, using what steps in 2 or 3 sentences._
 
 <!--more-->
 
-Why
-
-When
-
-How To
-
-Possible choices
-Pro and Cons
-Chosen one
-
-
-# Prerequisites & preparations
-
-- Uses ... (how to verify you have this in the correct version) . Install / upgrade
-- Uses ... (how to verify you have this in the correct version) . Install / upgrade200200000000000000000000
-TODO: Preparations (when starting from scratch)
+TODO: Tutorial. Context. 
+- When does this apply? ???????
+- Possible choices
+- Pro and Cons
+- Chosen one
 
 ## Starting point (Implementation)
+TODO: Preparations (when starting from scratch)
+- Uses ... (how to verify you have this in the correct version) . Install / upgrade
+- Uses ... (how to verify you have this in the correct version) . Install / upgrade200200000000000000000000
+
 Step-by-step
 - bricks n pieces
 - final product
@@ -48,3 +41,8 @@ Step-by-step
 ## Conclusion
 TODO: Lessons learned
 TODO: Call to action? 
+
+
+## Further reading? 
+Should this be here? 
+Subfile? 
