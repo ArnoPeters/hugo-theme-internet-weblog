@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-	{{ partial "reveal-hugo/head.html" . -}}
+  <head>
     {{ partial "reveal-hugo/layout/head" . }}
     {{ partial "reveal-hugo/layout/theme" . }}
     <!-- To insert markup before the closing head tag for all presentations,
@@ -10,7 +10,6 @@
          create layouts/partials/{section}/reveal-hugo/head.html -->
     {{- $sectionHeadPartial := printf "reveal-hugo/%s/head" (.Page.Section | default "home") -}}
     {{- if fileExists (printf "layouts/partials/%s.html" $sectionHeadPartial) -}}{{ partial $sectionHeadPartial . }}{{- end }}
-	 
   </head>
   <body>
     {{ if .Param "logo.src" }}

@@ -1,6 +1,8 @@
-{{ define "main" }}
+{{ partial "site_header.html" . }}
+{{ partial "page_header.html" . }}
+
 <main class="content list">
-	{{ partial "article/content.html" . }}
+	{{ partial "article_content.html" . }}
 	{{- $pages := .Pages -}}
 	{{- $paginator := .Paginate $pages -}}
 	{{- range .Paginator.Pages -}}
@@ -13,4 +15,5 @@
 	{{- end -}}
 	{{- partial "pagination.html" . -}}
 </main>
-{{ end }}
+{{ partial "page_footer.html" . }}
+{{ partial "site_footer.html" . }}

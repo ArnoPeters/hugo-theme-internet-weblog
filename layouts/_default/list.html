@@ -1,14 +1,7 @@
-{{ define "main" }}
-<main class="content list">
-	<article class="post">
-		<h2>{{ .Title }}</h2>
-		<ul>
-			{{ range .Data.Pages }}
-			<li>
-				<a href="{{ .Permalink }}">{{ .Title }}</a>
-			</li>
-			{{ end }}
-		</ul>
-	</article>
-</main>
-{{ end }}
+{{ partial "site_header.html" . }}
+{{ partial "page_header.html" . }}
+
+{{ partial "default_list.html" . }}
+
+{{ partial "page_footer.html" . }}
+{{ partial "site_footer.html" . }}

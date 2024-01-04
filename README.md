@@ -10,22 +10,20 @@ To see more, [check out my blog which is rendered with this theme](http://jnjosh
 
 ## Contents
 
-- [internet-weblog Theme for Hugo](#internet-weblog-theme-for-hugo)
-	- [Contents](#contents)
-	- [Installation](#installation)
-	- [Getting Started](#getting-started)
-		- [Configuring your Blog](#configuring-your-blog)
-			- [Where should blog post markdown files be stored?](#where-should-blog-post-markdown-files-be-stored)
-			- [How to configure the menu in the blog's navigation](#how-to-configure-the-menu-in-the-blogs-navigation)
-			- [Defining yourself as the Author](#defining-yourself-as-the-author)
-			- [Customizing the Bio Section, 404 page, javascript, or stylesheets](#customizing-the-bio-section-404-page-javascript-or-stylesheets)
-			- [Creating a Link Post](#creating-a-link-post)
-		- [Variables](#variables)
-		- [Overrides](#overrides)
-	- [Contributing](#contributing)
-	- [3rd Party Libraries](#3rd-party-libraries)
-	- [License](#license)
-	- [Contact](#contact)
+- [Installation](#installation)
+- [Getting started](#getting-started)
+    - [Configuring Your Blog](#configuring-your-blog)
+        - [Where Should Blog Post Markdown Files be Stored?](#where-should-blog-post-markdown-files-be-stored)
+        - [How to Configure the Menu in the Blog's Navigation](#how-to-configure-the-menu-in-the-blogs-navigation)
+        - [Defining Yourself as the Author](#defining-yourself-as-the-author)
+        - [Customizing the Bio Section, 404 Page, Javascript, or Stylesheets](#customizing-the-bio-section-404-page-javascript-or-stylesheets)
+        - [Creating a Link Post](#creating-a-link-post)
+    - [Variables](#variables)
+    - [Overrides](#overrides)
+- [Contributing](#contributing)
+- [3rd Party Libraries](#3rd-party-libraries)
+- [License](#license)
+- [Contact](#contact)
 
 ## Installation
 
@@ -210,6 +208,7 @@ The theme expects you to override a few files in your blog to finalize the custo
 | `not_found.html` | If you want to customize the 404 not found page, you can update it here. | Probably. The default is pretty plain. |
 | `custom_javascript.html` | If you need all pages to have your own custom javascript files referenced, you can do so here. | No |
 | `custom_stylesheets.html` | If you need all pages to have your own custom stylesheets referenced, you can do so here. | No |
+| `custom_image_handler.html` | The footer of the blog features a photo stream. If you want to customize it or use a different source, you can override this behavior. |  No |
 
 ## Contributing
 

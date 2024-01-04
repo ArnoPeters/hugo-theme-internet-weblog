@@ -1,15 +1,28 @@
-{{ define "main" }}
+{{ partial "site_header.html" . }}
+{{ partial "page_header.html" . }}
 
-<main class="content list">
-	{{ if .Content }}
+{{ if .Content }}
+<main class="content">
 	{{ partial "series_nav" .}}
 	<article class="post">
-		<h1>{{- if .IsNode -}}Series: {{ end -}}{{ .Title }}</h1>
+		<h2>{{- if .IsNode -}}Series: {{ end -}}{{ .Title }}</h2>
 
-		{{ partial "article/postmeta.html" . }}
+		<div class="postmeta">Posted on <time datetime="{{ .Date }}" pubdate="">{{ .Date.Format "January 2, 2006"
+				}}</time>{{- if eq hugo.Environment "development" }} wordcount: {{- .WordCount -}}{{- end -}}
+			{{ with .Params.Categories }}
+			in
+			<span class="categories">
+				{{ range $i, $v := . }}
+				<a class="category" href="/categories/{{ $v | urlize }}">{{ $v }}</a>{{ if ne (len $.Params.Categories) (add
+				$i 1) }}, {{ end }}
+				{{ end }}
+			</span>
+			{{ end }}
+		</div>
 
-		<h2>All articles in series</h2>
+		<h3>All articles in series</h3>
 		{{ with .CurrentSection.Pages }}
+		{{/* TODO: in page nav */}}
 		<ul>
 			{{ range .Reverse}}
 			<li>
@@ -25,9 +38,11 @@
 
 
 	</article>
-	{{ else }}
-	{{ partial "preview_list.html" . }}
-	{{ end }}
-</main>
 
+</main>
+{{ else }}
+{{ partial "default_list.html" . }}
 {{ end }}
+
+{{ partial "page_footer.html" . }}
+{{ partial "site_footer.html" . }}

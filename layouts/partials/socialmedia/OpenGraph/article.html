@@ -7,8 +7,8 @@
 <meta property="og:article:author" content="{{ . }}">
 {{- end -}}
 {{- end -}}
-{{- with (.GetTerms "tags") -}}
+{{- with .Params.Tags -}}
 {{- range . }}
-      <meta property="og:article:tag" content="{{ .Name }}">
+<meta property="og:article:tag" content="{{ . }}">
 {{- end -}}
 {{- end -}}

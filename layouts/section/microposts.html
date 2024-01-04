@@ -1,4 +1,5 @@
-{{ define "main" }}
+{{ partial "site_header.html" . }}
+{{ partial "page_header.html" . }}
 
 {{ if isset .Site.Params "yearlymicroposts" | and ( .Site.Params.yearlymicroposts ) }}
 
@@ -6,10 +7,9 @@
 
 {{ else }}
 
-  
-  <main class="content list">
-   {{ partial "preview_list.html" . }}
-</main>
-{{ end }}
+  {{ partial "default_list.html" . }}
 
 {{ end }}
+
+{{ partial "page_footer.html" . }}
+{{ partial "site_footer.html" . }}

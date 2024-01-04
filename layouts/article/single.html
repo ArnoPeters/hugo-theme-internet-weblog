@@ -1,9 +1,19 @@
-{{ define "main" }}
+{{ partial "site_header.html" . }}
+{{ partial "page_header.html" . }}
 <main class="content">
 	{{ partial "series_nav" .}}
 	<article class="post">
-		<h1>{{ .Title }}</h1>
-		{{ partial "article/postmeta.html" . }}
+		<h2>{{ .Title }}</h2>
+		<div class="postmeta">Posted on <time datetime="{{ .Date }}" pubdate="">{{ .Date.Format "January 2, 2006" }}</time>{{- if eq hugo.Environment "development" }} wordcount: {{- .WordCount -}}{{- end -}}
+			{{ with .Params.Categories }}
+			in
+			<span class="categories">
+				{{ range $i, $v := . }}
+				<a class="category" href="/categories/{{ $v | urlize }}">{{ $v }}</a>{{ if ne (len $.Params.Categories) (add $i 1) }}, {{ end }}
+				{{ end }}
+			</span>
+			{{ end }}
+		</div>
 
 		<p>
 			{{ .Content }}
@@ -11,4 +21,5 @@
 	</article>
 </main>
 
-{{ end }}
+{{ partial "page_footer.html" . }}
+{{ partial "site_footer.html" . }}

@@ -1,5 +1,10 @@
-{{ define "main" }}
-<main class="content">
-	{{ partial "article/content.html" . }}
-</main>
-{{ end }}
+{{ partial "site_header.html" . }}
+{{ partial "page_header.html" . }}
+
+  <main class="content">
+	{{ partial "article_content.html" . }}
+  </main>
+
+{{ partial "page_footer.html" . }}
+{{ partial "site_footer.html" . }}
+

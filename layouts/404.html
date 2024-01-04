@@ -1,8 +1,11 @@
-{{ define "main" }}
+{{ partial "site_header.html" . }}
+{{ partial "page_header.html" . }}
+
 <main class="content">
   <article class="post">
     {{ partial "not_found.html" . }}
   </article>
 </main>
 
-{{ end }}
+{{ partial "page_footer.html" . }}
+{{ partial "site_footer.html" . }}
