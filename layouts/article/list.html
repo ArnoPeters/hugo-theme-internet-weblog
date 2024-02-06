@@ -1,11 +1,10 @@
 {{ partial "site_header.html" . }}
 {{ partial "page_header.html" . }}
-
-{{ if .Content }}
+{{ if and (.Content) (ne .Kind "section") }}
 <main class="content">
 	{{ partial "series_nav" .}}
 	<article class="post">
-		<h2>{{- if .IsNode -}}Series: {{ end -}}{{ .Title }}</h2>
+ 		<h2>{{- if .IsNode }}Series: {{ end -}}{{ .Title }}</h2>
 
 		<div class="postmeta">Posted on <time datetime="{{ .Date }}" pubdate="">{{ .Date.Format "January 2, 2006"
 				}}</time>{{- if eq hugo.Environment "development" }} wordcount: {{- .WordCount -}}{{- end -}}
