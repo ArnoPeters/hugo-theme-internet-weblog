@@ -1,4 +1,23 @@
+
+{{- define "files" -}}
+	{{- $pages := slice -}}
+		{{- range (sort (where .Pages "Kind" "page") "File.BaseFileName" ) -}}
+		{{- $pages = $pages | append (dict "Page" . "file_path" (int (trim (index (split .File.BaseFileName "-") 0  ) " " ))) -}}
+		{{- end }}
+	{{- $p := sort $pages "file_path"  -}}
+	{{ "<!--" | safeHTML }} [{{ .Page.File.BaseFileName }}] {{ "-->" | safeHTML -}} <!-- root page. _index.md -->
+	{{ range $p  }}
+		{{ "<!--" | safeHTML }} [{{ .Page.File.BaseFileName }}] {{ "-->" | safeHTML -}}  <!-- secondary pages. Expected file name: "#int - filename.md" -->
+	{{ end }}
+{{ end }}
 {{ define "main" }}
-  {{ partial "reveal-hugo/slides" (slice .Page) }}
-  {{ partial "reveal-hugo/slides" (where .Pages "Kind" "page") }}
+	{{- $pages := slice -}}
+	{{- range (sort (where .Pages "Kind" "page") "File.BaseFileName" ) -}}
+		{{- $pages = $pages | append (dict "page" . "file_path" (int (trim (index (split .File.BaseFileName "-") 0  ) " " ))) -}}
+	{{- end }}
+	{{- $p := sort $pages "file_path"  -}}
+	{{ partial "reveal-hugo/slides" (slice .Page) }}  <!-- root page. _index.md -->
+	{{ range $p  }}
+		{{ partial "reveal-hugo/slides"  (slice .page.Page) }} <!-- secondary pages. Expected file name: "#int - filename.md" -->
+	{{ end }}
 {{ end }}
