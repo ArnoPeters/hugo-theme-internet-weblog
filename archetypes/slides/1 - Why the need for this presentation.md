@@ -1,6 +1,7 @@
----
-weight: 1
----
++++
+# No parameters are required in subfiles
++++
+
 ## TODO Main Content
 
 {{% reveal-hugo/note %}}

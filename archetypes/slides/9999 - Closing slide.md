@@ -1,6 +1,7 @@
----
-weight: 9999
----
++++
+# No parameters are required in subfiles
++++
+
 ## Lessons learned
 
 {{% reveal-hugo/note %}}

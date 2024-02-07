@@ -1,6 +1,6 @@
----
-weight: 10000
----
++++
+# No parameters are required in subfiles
++++
 
 TODO: put this in a global thing, behind a toggle
 

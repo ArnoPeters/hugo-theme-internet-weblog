@@ -11,7 +11,7 @@ description = "TODO: Write description"
 tags = [] # "string", "string", ...
 date = {{ .Date }}
 publishdate = {{ .Date }}
-showAboutMe = false  #todo: not implemented yet
+showaboutme = false
 
 [reveal_hugo]
 #theme = "custom/aps-robot-lung"
@@ -20,11 +20,14 @@ showAboutMe = false  #todo: not implemented yet
 #custom_css = "custom.css"  # files can be page resource
 #custom_js = "custom.js"
 +++
+
 # {{ replace .Name "-" " " | title }}
+
 TODO: Write Slide
 
 {{% reveal-hugo/note %}}
 TODO: speaker notes
+
 - wat zeg ik
 
 - wat is de conclusie die ik eruit kan trekken
