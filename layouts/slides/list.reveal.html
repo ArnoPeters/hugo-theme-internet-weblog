@@ -1,16 +1,5 @@
-
-{{- define "files" -}}
-	{{- $pages := slice -}}
-		{{- range (sort (where .Pages "Kind" "page") "File.BaseFileName" ) -}}
-		{{- $pages = $pages | append (dict "Page" . "file_path" (int (trim (index (split .File.BaseFileName "-") 0  ) " " ))) -}}
-		{{- end }}
-	{{- $p := sort $pages "file_path"  -}}
-	{{ "<!--" | safeHTML }} [{{ .Page.File.BaseFileName }}] {{ "-->" | safeHTML -}} <!-- root page. _index.md -->
-	{{ range $p  }}
-		{{ "<!--" | safeHTML }} [{{ .Page.File.BaseFileName }}] {{ "-->" | safeHTML -}}  <!-- secondary pages. Expected file name: "#int - filename.md" -->
-	{{ end }}
-{{ end }}
 {{ define "main" }}
+   {{ if .Param "showAboutMe" }}aboutme [{{ .Params.showaboutme }}]{{ end }}
 	{{- $pages := slice -}}
 	{{- range (sort (where .Pages "Kind" "page") "File.BaseFileName" ) -}}
 		{{- $pages = $pages | append (dict "page" . "file_path" (int (trim (index (split .File.BaseFileName "-") 0  ) " " ))) -}}
