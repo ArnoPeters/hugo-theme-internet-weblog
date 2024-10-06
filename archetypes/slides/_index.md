@@ -2,10 +2,10 @@
 outputs = ["Reveal"]
 
 draft = true
-slug = "{{lower (replace .Name " " "-") }}"  # slug property is not working for _index.md, url property is -> https://github.com/gohugoio/hugo/issues/7124
-url = "slides/{{lower (replace .Name " " "-") }}"
+slug = "{{lower (replace .Name ' ' '-') }}"  # slug property is not working for _index.md, url property is -> https://github.com/gohugoio/hugo/issues/7124
+url = "slides/{{lower (replace .Name ' ' '-') }}"
 author = ["{{ with .Site.Author.firstname }}{{ . }}{{ end }} {{ with .Site.Author.lastname }}{{ . }}{{ end }}"]
-title = "{{ replace .Name "-" " " | title }}"
+title = "{{ replace .Name '-' ' ' | title }}"
 summary = "TODO: Write summary"
 description = "TODO: Write description"
 tags = [] # "string", "string", ...
@@ -34,4 +34,4 @@ TODO: speaker notes
 
 {{% /reveal-hugo/note %}}
 
-TODO: iets doen met {{ if .Params.Private }} <meta name="robots" content="noindex" /> {{ end }}
+
