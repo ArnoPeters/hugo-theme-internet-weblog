@@ -330,9 +330,17 @@ article .postmeta {
 	padding: 0 0 0 6px;
 }
 
-/* Footer */
 
-footer {
+/* article */
+article.post footer {
+	border-bottom: 1px solid #476286;
+	border-top: 1px solid #476286;
+	margin-top: 40px;
+}
+
+/* Footer */
+ 
+body>footer {
 	background-color: #545454;
 	color: #ffffff;
 	margin: 0;

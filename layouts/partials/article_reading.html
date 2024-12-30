@@ -1,0 +1,24 @@
+{{ if  .Params.reading }}
+<footer>
+<p>
+<h2>Further reading</h2>
+
+<ul>
+{{ range .Params.reading }}
+<li><a href="{{ .url }}">{{ .title }}</a>
+      <!-- {{ if ne .Type "page" }}
+      <item>
+        <title>{{ .Title }}</title>
+        <link>{{ .Permalink }}</link>
+        <pubDate>{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
+        <author>{{ with .Site.Params.Author.email }}{{.}} - {{end}}{{ with .Site.Params.Author.firstname }}{{.}}{{ end }} {{ with .Site.Params.Author.lastname }}{{.}}{{end}}</author>
+        <guid>{{ .Permalink }}</guid>
+        <description>{{ .Content | html }}</description>
+      </item>
+      {{ end }} -->
+    {{ end }}
+	</li>
+	</ul>
+</p>	
+	</footer>
+	{{ end }}

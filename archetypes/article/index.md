@@ -11,6 +11,9 @@ date: {{ .Date }}
 publishdate: {{ .Date }}
 #coverImage: "cover.png"
 #coverImageAlt: "cover alt Text"
+# reading: [
+#   { title : "someTitle",  url : "https://someUrl" }
+# ]
 ---
 TODO: Article: Write Summary
 <!--more-->
