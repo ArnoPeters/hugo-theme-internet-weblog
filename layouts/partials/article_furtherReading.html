@@ -1,11 +1,20 @@
-{{ if  .Params.reading }}
+{{ if  .Params.furtherReading }}
 <footer>
-<p>
-<h2>Further reading</h2>
-
-<ul>
-{{ range .Params.reading }}
-<li><a href="{{ .url }}">{{ .title }}</a>
+  <h2>Further reading</h2>
+  <ul>
+	
+{{ range .Params.furtherReading }}
+<li>
+<a href="{{ .url }}">{{ if .label }}{{ .label }}{{ else }}{{ .url }}{{ end }}</a><br>
+{{ with .description}}
+	  <i>{{ .}}</i>
+{{ end}}
+	  <ul>
+{{ range .urls }}
+       <li><a href="{{ .url }}">{{ if .label }}{{ .label }}{{ else }}{{ .url }}{{ end }}</a><br />
+{{end }}
+    </ul>
+	 </li>
       <!-- {{ if ne .Type "page" }}
       <item>
         <title>{{ .Title }}</title>
@@ -16,9 +25,7 @@
         <description>{{ .Content | html }}</description>
       </item>
       {{ end }} -->
-    {{ end }}
-	</li>
-	</ul>
-</p>	
-	</footer>
-	{{ end }}
+{{ end }}
+	<ul>
+</footer>
+{{ end }}

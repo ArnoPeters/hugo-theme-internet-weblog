@@ -1,5 +1,5 @@
 <figure class="image-caption">
-{{- if .Destination }} 
+{{- if .Destination }}
 {{-   $img := .Page.Resources.GetMatch .Destination -}}
 {{-   if and (not $img) .Page.File -}}
 {{-     $path := path.Join .Page.File.Dir .Destination -}}
@@ -14,9 +14,10 @@
         {{ $small.RelPermalink }} 458w,
         {{ $medium.RelPermalink }} 726w,
         {{ $large.RelPermalink }} 1200w" sizes="80vw" src="{{ $small.RelPermalink }}" >
-		  {{ with $.Title | safeHTML }}<figcaption>{{ . }}</figcaption>{{ end }}
-{{-   else -}}
-    <img src="{{ .Destination | safeURL }}" alt="{{ $.Text }}" >{{- end -}}
+	
+    {{-   else -}}
+       <img src="{{ .Destination | safeURL }}" alt="{{ $.Text }}" >
+   {{- end -}}
     {{ with $.Title | safeHTML }}<figcaption>{{ . }}</figcaption>{{ end }}
 {{- else -}}
     <figcaption>TODO: Grab image '{{ $.Text }}'</figcaption>

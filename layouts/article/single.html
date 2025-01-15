@@ -14,13 +14,8 @@
 			</span>
 			{{ end }}
 		</div>
-
-		<p>
 			{{ .Content }}
-		</p>
-		<p>
-			{{ partial "article_reading.html" . }}
-		</p>
+		{{ partial "article_furtherReading.html" . }}
 	</article>
 </main>
 

@@ -12,7 +12,7 @@ body {
 	display: flex;
 	flex-direction: column;
 }
-
+ 
 a[href] {
 	color: #476286;
 	text-decoration: none;
@@ -336,6 +336,7 @@ article.post footer {
 	border-bottom: 1px solid #476286;
 	border-top: 1px solid #476286;
 	margin-top: 40px;
+	padding-top: 20px;
 }
 
 /* Footer */
