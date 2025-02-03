@@ -1,26 +1,30 @@
 {{ partial "site_header.html" . }}
 {{ partial "page_header.html" . }}
 {{ if .Content }}
-
-
 <main class="content">
 	{{ partial "series_nav" .}}
 	<article class="post">
-		<h2>{{ .Title }}</h2>
+		<h2>{{- if .IsNode -}}Series: {{ end -}}{{ .Title }}</h2>
+		{{ partial "postmeta" .}}
+		<h3>All articles in series</h3>
+		{{ with .CurrentSection.Pages }}
+		{{/* TODO: in page nav */}}
+		<ul>
+			{{ range .Reverse}}
+			<li>
+				<a href="{{ .Permalink }}">{{ .LinkTitle }}</a>
+			</li>
+			{{ end }}
+		</ul>
+		{{ end }}
 
 		<p>
 			{{ .Content }}
 		</p>
-
-
 	</article>
-	{{ partial "preview_list.html" . }}
 </main>
-
-
 {{ else }}
 {{ partial "default_list.html" . }}
 {{ end }}
-
 {{ partial "page_footer.html" . }}
 {{ partial "site_footer.html" . }}

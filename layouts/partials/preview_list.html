@@ -1,6 +1,8 @@
-{{- $pages := .Pages -}}
-{{- if .IsHome -}}
-{{- $pages = where .Site.Pages "Type" "in" (slice "article") -}}
+{{- /* Preview list is used for main and article page. */ -}}
+
+{{- $pages := .Site.Pages -}}
+{{- if not (.IsHome) -}}
+{{- $pages = where .Site.Pages "Type" "in" (slice "article" "series") -}}
 {{- $pages = where $pages "Parent.IsHome" "ne" true -}}
 {{- end -}}
 {{- $paginator := .Paginate $pages -}}
@@ -9,32 +11,32 @@
 {{- $url := replace .Permalink .Site.BaseURL "" -}}
 
 <article class="post">
-	<h2>
+    <h2>
 
-		{{ with .Parent }}
-		{{ if .Parent }}
-		{{ if not .Parent.IsHome }}
-		<a href="{{ .Permalink }}">{{- if .IsNode -}}Series: {{ end -}}{{ .Title }}</a> -
-		{{ end }}
-		{{ end }}
-		{{ end }}
+        {{ with .Parent }}
+        {{ if .Parent }}
+        {{ if not .Parent.IsHome }}
+        <a href="{{ .Permalink }}">{{- if .IsNode -}}Series: {{ end -}}{{ .Title }}</a> -
+        {{ end }}
+        {{ end }}
+        {{ end }}
 
 
-		<a href="{{ .Permalink }}">{{- if .IsNode -}}Series: {{ end -}}{{ .Title }}</a>
-	</h2>
-	{{- partial "preview_post_summary.html" . -}}
-	{{ if and .IsNode (not $page.IsHome ) }}
-	{{ with .CurrentSection.Pages }}
-	<h3>Articles in series:</h3>
-	<ul>
-		{{ range .Reverse}}
-		<li>
-			<a href="{{ .Permalink }}">{{ .LinkTitle }}</a>
-		</li>
-		{{ end }}
-	</ul>
-	{{ end }}
-	{{- end -}}
+        <a href="{{ .Permalink }}">{{- if .IsNode -}}Series: {{ end -}}{{ .Title }}</a>
+    </h2>
+    {{- partial "preview_post_summary.html" . -}}
+    {{ if and .IsNode (not $page.IsHome ) }}
+    {{ with .CurrentSection.Pages }}
+    <h3>Articles in series:</h3>
+    <ul>
+        {{ range .Reverse}}
+        <li>
+            <a href="{{ .Permalink }}">{{ .LinkTitle }}</a>
+        </li>
+        {{ end }}
+    </ul>
+    {{ end }}
+    {{- end -}}
 </article>
 
 {{- end -}}
