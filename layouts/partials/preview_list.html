@@ -1,13 +1,16 @@
 {{- /* Preview list is used for main and article page. */ -}}
-
-{{- $pages := .Site.Pages -}}
-{{- if not (.IsHome) -}}
-{{- $pages = where .Site.Pages "Type" "in" (slice "article" "series") -}}
+{{- $pages := where .Site.Pages "Type" "in" (slice "article" ) -}}
 {{- $pages = where $pages "Parent.IsHome" "ne" true -}}
-{{- end -}}
+{{- $pages = where $pages ".IsNode" "ne" true -}}
+
+{{ $ran := first 10 $pages }}
 {{- $paginator := .Paginate $pages -}}
+{{- if .IsHome -}}
+{{ $ran = .Paginator.Pages }}
+{{ end}}
+
 {{- $page := . -}}
-{{- range .Paginator.Pages -}}
+{{- range $ran -}}
 {{- $url := replace .Permalink .Site.BaseURL "" -}}
 
 <article class="post">

@@ -6,6 +6,9 @@
 	<article class="post">
 		<h2>{{- if .IsNode -}}Series: {{ end -}}{{ .Title }}</h2>
 		{{ partial "postmeta" .}}
+		<p>
+			{{ .Content }}
+		</p>
 		<h3>All articles in series</h3>
 		{{ with .CurrentSection.Pages }}
 		{{/* TODO: in page nav */}}
@@ -18,9 +21,7 @@
 		</ul>
 		{{ end }}
 
-		<p>
-			{{ .Content }}
-		</p>
+
 	</article>
 </main>
 {{ else }}

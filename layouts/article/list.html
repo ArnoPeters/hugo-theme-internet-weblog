@@ -1,20 +1,37 @@
 {{ partial "site_header.html" . }}
 {{ partial "page_header.html" . }}
+
+
 {{ if .Content }}
 
 
 <main class="content">
 	{{ partial "series_nav" .}}
 	<article class="post">
-		<h2>{{ .Title }}</h2>
+		<h2>{{ if and  .IsNode  (not .Parent.IsHome) }}	Series: {{ end -}}{{ .Title }}</h2>
 
 		<p>
 			{{ .Content }}
 		</p>
 
+		{{ if and  .IsNode  (not .Parent.IsHome) }}	
+		<h3>All articles in series</h3>
+			{{ with .CurrentSection.Pages }}
+	{{/* TODO: in page nav */}}
+	<ul>
+		{{ range .Reverse}}
+		<li>
+			<a href="{{ .Permalink }}">{{ .LinkTitle }}</a>
+		</li>
+		{{ end }}
+	</ul>
 
-	</article>
-	{{ partial "preview_list.html" . }}
+	
+	{{ end }}
+	{{ else }}
+{{ partial "preview_list.html" . }}
+{{ end }}
+</article>
 </main>
 
 
