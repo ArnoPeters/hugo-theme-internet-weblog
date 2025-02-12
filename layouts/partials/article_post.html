@@ -1,4 +1,6 @@
-	{{ partial "series_nav" .}}
+<main class="content">
+
+{{ partial "series_nav" .}}
 	<article class="post">
 		<h2>{{ .Title }}</h2>
 		{{ partial "postmeta" .}}
@@ -7,4 +9,19 @@
 		<p>
 			{{ .Content }}
 		</p>
+
+
+{{ if and (.IsNode) .Parent.IsHome}}
+{{ partial "default_list.html" . }}
+{{ else }}
+
+		{{ if or ( .IsNode ) (not (eq .Parent.CurrentSection  .Parent.FirstSection )) }}	
+	{{ partial "articles_in_series.html" .}}
+	{{ end }} 
+	{{ end }} 
+
+
 	</article>
+</main>
+
+	

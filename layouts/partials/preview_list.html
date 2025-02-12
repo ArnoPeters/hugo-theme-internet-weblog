@@ -1,11 +1,12 @@
 {{- /* Preview list is used for main and article page. */ -}}
 {{- $pages := where .Site.Pages "Type" "in" (slice "article" ) -}}
 {{- $pages = where $pages "Parent.IsHome" "ne" true -}}
-{{- $pages = where $pages ".IsNode" "ne" true -}}
+
 
 {{ $ran := first 10 $pages }}
+
+{{- if not .IsHome -}}
 {{- $paginator := .Paginate $pages -}}
-{{- if .IsHome -}}
 {{ $ran = .Paginator.Pages }}
 {{ end}}
 
@@ -19,28 +20,19 @@
         {{ with .Parent }}
         {{ if .Parent }}
         {{ if not .Parent.IsHome }}
-        <a href="{{ .Permalink }}">{{- if .IsNode -}}Series: {{ end -}}{{ .Title }}</a> -
+        <a href="{{ .Permalink }}">{{ .Title }}</a> -
         {{ end }}
         {{ end }}
         {{ end }}
 
 
-        <a href="{{ .Permalink }}">{{- if .IsNode -}}Series: {{ end -}}{{ .Title }}</a>
+        <a href="{{ .Permalink }}">{{ .Title }}</a>
     </h2>
     {{- partial "preview_post_summary.html" . -}}
-    {{ if and .IsNode (not $page.IsHome ) }}
-    {{ with .CurrentSection.Pages }}
-    <h3>Articles in series:</h3>
-    <ul>
-        {{ range .Reverse}}
-        <li>
-            <a href="{{ .Permalink }}">{{ .LinkTitle }}</a>
-        </li>
-        {{ end }}
-    </ul>
-    {{ end }}
-    {{- end -}}
+  
 </article>
 
 {{- end -}}
+{{ if not .IsHome }}
 {{- partial "pagination.html" . -}}
+{{- end -}}

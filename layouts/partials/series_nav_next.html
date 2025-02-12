@@ -3,52 +3,65 @@
 {{- $linkClass:= "next-article" -}}
 {{- $seriesLink:= ""}}
 {{- $seriesLinkTitle:= ""}}
-{{- with .Parent.Pages.Next .}}
-<!-- if there is a next page for this -->
-{{- if ne .CurrentSection .FirstSection -}}
-<!-- series subpost -->
-{{- $link = .Permalink -}}
-{{- $linkTitle = .LinkTitle -}}
-{{- if not .IsNode -}}
-{{- $seriesLink = .Parent.Permalink -}}
-{{- $seriesLinkTitle = .Parent.LinkTitle -}}
-{{- $linkClass = "series-next-chapter" -}}
-{{- end -}}
+
+{{- if .IsNode -}} 
+	{{- with (index .CurrentSection.Pages (sub (len .CurrentSection.Pages) 1)) -}}
+		{{- $link = .Permalink -}}
+		{{- $linkTitle = .LinkTitle -}}
+		{{- $seriesLink = .Parent.Permalink -}}
+		{{- $seriesLinkTitle = .Parent.LinkTitle -}}
+		{{- $linkClass = "series-next-chapter" -}}
+	{{- end -}}
 {{- else -}}
-{{- if not .IsNode -}}
-{{- if not .Parent.IsHome -}}
-<!-- series root page link to next -->
-{{- $link = .Permalink -}}
-{{- $linkTitle = .LinkTitle -}}
+	{{- if eq ( first 1 .CurrentSection.Pages) (slice .Page) -}}
+		<!-- last of series -->
+		<!-- works, except scan for sibling -->
+		<!-- find next article, or go to parent-->
+		{{- if and (and (not .Parent.Parent.IsHome) (.Parent.IsNode)) (ne nil (.Parent.Parent.Pages.Next .Parent ) )}}
+			{{- with .Parent.Parent.Pages.Next .Parent -}}
+				{{- $link = .Permalink -}}
+				{{- $linkTitle = .LinkTitle -}}
+				{{- $linkClass = "series-next-article" -}}
+			{{- end -}}
+		{{- else -}}
+			{{- if ne .CurrentSection .FirstSection -}}
+				<!-- back to parent from series page -->
+				{{- with .Parent.Parent -}}
+					{{- $link = .Permalink -}}
+					{{- $linkTitle = .LinkTitle -}}
+					{{- $linkClass = "" -}}
+				{{- end -}}
+			{{- else -}}
+				<!-- back to parent from single page -->
+				{{- with .Parent -}}
+					{{- $link = .Permalink -}}
+					{{- $linkTitle = .LinkTitle -}}
+					{{- $linkClass = "" -}}
+				{{- end -}}
+			{{- end -}}
+		{{- end -}}
+	{{- else -}}
+		{{- with .Parent.Pages.Next . -}}
+				{{- $link = .Permalink -}}
+				{{- $linkTitle = .LinkTitle -}}
+				{{- if not .Parent.Parent.IsHome}}
+					{{- $seriesLink = .Parent.Permalink -}}
+					{{- $seriesLinkTitle = .Parent.LinkTitle -}}
+				{{- end -}}
+				{{- $linkClass = "series-next-article" -}}
+			{{- end -}}
+	{{- end -}}
 {{- end -}}
-{{- end -}}
-{{- end -}}
-{{- else -}}
-<!-- if there is no next page, and it has a parent that is not the root list -->
-{{- if not .IsNode -}}
-{{- if ne .CurrentSection .FirstSection -}}
-<!-- if not root list page -->
-<!-- series link back to parent's next page as next node in series -->
-{{- with .Parent.Parent.Pages.Next .Parent -}}
-{{- $link = .Permalink -}}
-{{- $linkTitle = .LinkTitle -}}
-{{- $linkClass = "series-next-article" -}}
-{{- end -}}
-{{- else -}}
-<!-- no more pages, link back to Articles-->
-{{- with .Parent -}}
-{{- $link = .Permalink -}}
-{{- $linkTitle = .LinkTitle -}}
-{{- $linkClass = "" -}}
-{{- end -}}
-{{- end -}}
-{{- end -}}
-{{- end -}}
-<li class="next {{ $linkClass -}}">
+
+<li class="next{{- $linkClass -}}">
 	{{- if $seriesLink -}}
-	<a href="{{- $seriesLink -}}">{{ $seriesLinkTitle }}</a>
+		{{- if eq $seriesLink  .Permalink}} 
+			<span class="navlink-next">{{- $seriesLinkTitle -}}</span>
+		{{- else -}}
+			<a class="navlink-next" href="{{- $seriesLink -}}">{{- $seriesLinkTitle -}}</a>
+		{{- end -}}
 	{{- end -}}
 	{{- if $link -}}
-	<a href="{{- $link -}}">{{ $linkTitle }}</a>
+		<a class="navlink-next"  href="{{- $link -}}">{{- $linkTitle -}}</a>
 	{{- end -}}
 </li>

@@ -174,8 +174,9 @@ nav.post li.prev {
 	text-align: left;
 }
 
-nav.post li.prev a::before {
+.navlink-prev::before {
 	content: "« ";
+	display: inline-block;
 }
 
 nav.post li.prev a {
@@ -196,8 +197,10 @@ nav.post li.next {
 nav.post li.next a {
 	margin-left:.5em;
 }
-nav.post li.next a::after {
+
+.navlink-next::after{ 
 	content: " »";
+	display: inline-block;
 }
 
 li.next-article,

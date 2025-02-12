@@ -1,51 +1,76 @@
 {{- $link:= "" -}}
 {{- $linkTitle:= "" -}}
+{{- $linkClass:= "prev-article" -}}
 {{- $seriesLink:= ""}}
 {{- $seriesLinkTitle:= ""}}
-{{- $linkClass:= "prev-article" -}}
-{{- with .Parent.Pages.Prev . -}}
-<!-- if there is a previous page for this -->
-{{- if ne .CurrentSection .FirstSection -}}
-<!-- series subpost or prev article-->
-{{- $link = .Permalink -}}
-{{- $linkTitle = .LinkTitle -}}
-{{- if not .IsNode -}}
-{{- $seriesLink = .Parent.Permalink -}}
-{{- $seriesLinkTitle = .Parent.LinkTitle -}}
-{{- $linkClass = "series-prev-chapter" -}}
-{{- end -}}
+
+{{- if .IsNode -}} 
+	<!-- series root-->
+	{{- with .Parent.Pages.Prev . -}}
+		{{- $link = .Permalink -}}
+		{{- $linkTitle = .LinkTitle -}}
+		{{- if not .Parent.Parent.IsHome}}
+			{{- $seriesLink = .Parent.Permalink -}}
+			{{- $seriesLinkTitle = .Parent.LinkTitle -}}
+		{{- end -}}
+		{{- $linkClass = "series-prev-article" -}}
+	{{ else }}
+		<!-- very first - back to all articles -->
+		{{- with .Parent -}}
+			{{- $link = .Permalink -}}
+			{{- $linkTitle = .LinkTitle -}}
+			{{- $linkClass = "series-prev-article" -}}
+		{{- end -}}
+	{{- end -}}
 {{- else -}}
-{{- if not .IsNode -}}
-{{- if not .Parent.IsHome -}}
-<!-- series root page link to prev -->
-{{- $link = .Permalink -}}
-{{- $linkTitle = .LinkTitle -}}
+   {{- if eq ( last 1 .CurrentSection.Pages) (slice .Page) -}}
+	<!-- last item in series-->
+		{{- if and (and (not .Parent.Parent.IsHome) (.Parent.IsNode)) (ne nil (.Parent.Parent.Pages.Prev .Parent ) )}}
+			{{- with .Parent -}}
+				{{- $link = .Permalink -}}
+				{{- $linkTitle = .LinkTitle -}}
+				{{- $linkClass = "" -}}
+			{{- end -}}
+		{{- else -}}
+		<!-- very first - back to all articles -->
+			{{- with .Parent -}}
+				{{- $link = .Permalink -}}
+				{{- $linkTitle = .LinkTitle -}}
+				{{- $linkClass = "series-prev-article" -}}
+			{{- end -}}
+		{{- end -}}
+	{{- else -}}
+	<!--  page not series first-->
+		{{ if  .Parent.Parent.IsHome }}
+			{{ with .Parent.Pages.Prev . }}
+				{{- with (index .CurrentSection.Pages 0) -}}
+				{{- $link = .Permalink -}}
+				{{- $linkTitle = .LinkTitle -}}
+				{{- $seriesLink = .Parent.Permalink -}}
+				{{- $seriesLinkTitle = .Parent.LinkTitle -}}
+			{{ end }}	
+		{{ end }}
+		{{ else }}
+			{{- with (.PrevInSection) -}}
+				{{- $link = .Permalink -}}
+				{{- $linkTitle = .LinkTitle -}}
+				{{- $seriesLink = .Parent.Permalink -}}
+				{{- $seriesLinkTitle = .Parent.LinkTitle -}}
+				{{- $linkClass = "series-prev-chapter" -}}
+			{{- end -}}
+		{{ end }}
+	{{ end }}
 {{- end -}}
-{{- end -}}
-{{- end -}}
-{{- else -}}
-<!-- if there is no previous page, and it has a parent that is not the root list -->
-{{- if not .IsNode -}}
-{{- if ne .CurrentSection .FirstSection -}}<!-- if not root list page -->
-<!-- series link back to parent as first node in series -->
-{{- $link = .Parent.Permalink -}}
-{{- $linkTitle = .Parent.LinkTitle -}}
-{{- $linkClass = "series-prev-chapter" -}}
-{{- else -}}
-<!-- no more pages, link back to Articles-->
-{{- with .Parent -}}
-{{- $link = .Permalink -}}
-{{- $linkTitle = .LinkTitle -}}
-{{- $linkClass = "" -}}
-{{- end -}}
-{{- end -}}
-{{- end -}}
-{{- end -}}
-<li class="prev {{ $linkClass -}}">
-	{{- if $link}}
-	<a href="{{- $link -}}">{{ $linkTitle }}</a>
-	{{- end }}
+
+<li class="prev{{- $linkClass -}}">
+	{{- if $link -}}
+		<a class="navlink-prev"  href="{{- $link -}}">{{- $linkTitle -}}</a>
+	{{- end -}}
 	{{- if $seriesLink -}}
-	<a href="{{- $seriesLink -}}">{{ $seriesLinkTitle }}</a>
+		{{- if eq $seriesLink  .Permalink}} 
+			<span class="navlink-prev">{{- $seriesLinkTitle -}}</span>
+		{{- else -}}
+			<a  class="navlink-prev" href="{{- $seriesLink -}}">{{- $seriesLinkTitle -}}</a>
+		{{- end -}}
 	{{- end -}}
 </li>

@@ -1,5 +1,8 @@
-<div class="postmeta"><time datetime="{{ .PublishDate }}" pubdate="">{{ .Date.Format "January 2, 2006"
+<div class="postmeta">
+{{ if not .Parent.IsHome }}
+<time datetime="{{ .PublishDate }}" pubdate="">{{ .Date.Format "January 2, 2006"
 	}}</time>
+{{ end }}
 {{ with .Params.Categories -}}
 in
 	<span class="categories">
