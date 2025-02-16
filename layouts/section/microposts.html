@@ -1,9 +1,9 @@
-{{ partial "site_header.html" . }}
-{{ partial "page_header.html" . }}
+{{ partial "site/header.html" . }}
+{{ partial "page/header.html" . }}
 
 {{ if isset .Site.Params "yearlymicroposts" | and ( .Site.Params.yearlymicroposts ) }}
 
-  {{ partial "yearly_grouping.html" . }}
+{{ partial "yearly_grouping.html" . }}
 
 {{ else }}
 
@@ -11,5 +11,5 @@
 
 {{ end }}
 
-{{ partial "page_footer.html" . }}
-{{ partial "site_footer.html" . }}
+{{ partial "page/footer.html" . }}
+{{ partial "site/footer.html" . }}

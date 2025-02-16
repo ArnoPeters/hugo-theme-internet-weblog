@@ -1,0 +1,144 @@
+{{ if not .Parent.IsHome }}
+
+	<!-- prev -->
+	{{- $prev_link:= "" -}}
+	{{- $prev_linkTitle:= "" -}}
+	{{- $prev_seriesLink:= ""}}
+	{{- $prev_seriesLinkTitle:= ""}}
+
+	{{- if .IsNode -}} 
+		<!-- series root-->
+		{{- with .Parent.Pages.Prev . -}}
+			{{- $prev_link = .Permalink -}}
+			{{- $prev_linkTitle = .LinkTitle -}}
+			{{- if not .Parent.Parent.IsHome}}
+				{{- $prev_seriesLink = .Parent.Permalink -}}
+				{{- $prev_seriesLinkTitle = .Parent.LinkTitle -}}
+			{{- end -}}
+		{{ else }}
+			<!-- very first - back to all articles -->
+			{{- with .Parent -}}
+				{{- $prev_link = .Permalink -}}
+				{{- $prev_linkTitle = .LinkTitle -}}
+			{{- end -}}
+		{{- end -}}
+	{{- else -}}
+		{{- if eq ( last 1 .CurrentSection.Pages) (slice .Page) -}}
+		<!-- last item in series-->
+			{{- if and (and (not .Parent.Parent.IsHome) (.Parent.IsNode)) (ne nil (.Parent.Parent.Pages.Prev .Parent ) )}}
+				{{- with .Parent -}}
+					{{- $prev_link = .Permalink -}}
+					{{- $prev_linkTitle = .LinkTitle -}}
+				{{- end -}}
+			{{- else -}}
+			<!-- very first - back to all articles -->
+				{{- with .Parent -}}
+					{{- $prev_link = .Permalink -}}
+					{{- $prev_linkTitle = .LinkTitle -}}
+				{{- end -}}
+			{{- end -}}
+		{{- else -}}
+		<!--  page not series first-->
+			{{ if  .Parent.Parent.IsHome }}
+				{{ with .Parent.Pages.Prev . }}
+					{{- with (index .CurrentSection.Pages 0) -}}
+					{{- $prev_link = .Permalink -}}
+					{{- $prev_linkTitle = .LinkTitle -}}
+					{{- $prev_seriesLink = .Parent.Permalink -}}
+					{{- $prev_seriesLinkTitle = .Parent.LinkTitle -}}
+				{{ end }}	
+			{{ end }}
+			{{ else }}
+				{{- with (.PrevInSection) -}}
+					{{- $prev_link = .Permalink -}}
+					{{- $prev_linkTitle = .LinkTitle -}}
+					{{- $prev_seriesLink = .Parent.Permalink -}}
+					{{- $prev_seriesLinkTitle = .Parent.LinkTitle -}}
+				{{- end -}}
+			{{ end }}
+		{{ end }}
+	{{- end -}}
+	<!-- /prev -->
+
+	<!-- next -->
+	{{- $next_link:= "" -}}
+	{{- $next_linkTitle:= "" -}}
+	{{- $next_seriesLink:= ""}}
+	{{- $next_seriesLinkTitle:= ""}}
+
+	{{- if .IsNode -}} 
+		{{- with (index .CurrentSection.Pages (sub (len .CurrentSection.Pages) 1)) -}}
+			{{- $next_link = .Permalink -}}
+			{{- $next_linkTitle = .LinkTitle -}}
+			{{- $next_seriesLink = .Parent.Permalink -}}
+			{{- $next_seriesLinkTitle = .Parent.LinkTitle -}}
+		{{- end -}}
+	{{- else -}}
+		{{- if eq ( first 1 .CurrentSection.Pages) (slice .Page) -}}
+			<!-- last of series -->
+			<!-- works, except scan for sibling -->
+			<!-- find next article, or go to parent-->
+			{{- if and (and (not .Parent.Parent.IsHome) (.Parent.IsNode)) (ne nil (.Parent.Parent.Pages.Next .Parent ) )}}
+				{{- with .Parent.Parent.Pages.Next .Parent -}}
+					{{- $next_link = .Permalink -}}
+					{{- $next_linkTitle = .LinkTitle -}}
+				{{- end -}}
+			{{- else -}}
+				{{- if ne .CurrentSection .FirstSection -}}
+					<!-- back to parent from series page -->
+					{{- with .Parent.Parent -}}
+						{{- $next_link = .Permalink -}}
+						{{- $next_linkTitle = .LinkTitle -}}
+					{{- end -}}
+				{{- else -}}
+					<!-- back to parent from single page -->
+					{{- with .Parent -}}
+						{{- $next_link = .Permalink -}}
+						{{- $next_linkTitle = .LinkTitle -}}
+					{{- end -}}
+				{{- end -}}
+			{{- end -}}
+		{{- else -}}
+			{{- with .Parent.Pages.Next . -}}
+					{{- $next_link = .Permalink -}}
+					{{- $next_linkTitle = .LinkTitle -}}
+					{{- if not .Parent.Parent.IsHome}}
+						{{- $next_seriesLink = .Parent.Permalink -}}
+						{{- $next_seriesLinkTitle = .Parent.LinkTitle -}}
+					{{- end -}}
+				{{- end -}}
+		{{- end -}}
+	{{- end -}}
+	<!-- /next -->
+
+	<nav class="post">
+		<ul>
+			
+			<li class="prev">
+				{{- if $prev_link -}}
+					<a class="navlink-prev"  href="{{- $prev_link -}}">{{- $prev_linkTitle -}}</a>
+				{{- end -}}
+				{{- if $prev_seriesLink -}}
+					{{- if eq $prev_seriesLink  .Permalink}} 
+						<span class="navlink-prev">{{- $prev_seriesLinkTitle -}}</span>
+					{{- else -}}
+						<a  class="navlink-prev" href="{{- $prev_seriesLink -}}">{{- $prev_seriesLinkTitle -}}</a>
+					{{- end -}}
+				{{- end -}}
+			</li>
+
+			<li class="next">
+				{{- if $next_seriesLink -}}
+					{{- if eq $next_seriesLink  .Permalink}} 
+						<span class="navlink-next">{{- $next_seriesLinkTitle -}}</span>
+					{{- else -}}
+						<a class="navlink-next" href="{{- $next_seriesLink -}}">{{- $next_seriesLinkTitle -}}</a>
+					{{- end -}}
+				{{- end -}}
+				{{- if $next_link -}}
+					<a class="navlink-next"  href="{{- $next_link -}}">{{- $next_linkTitle -}}</a>
+				{{- end -}}
+			</li>
+		</ul>
+	</nav>
+{{ end }}

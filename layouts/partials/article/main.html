@@ -1,0 +1,41 @@
+<main class="content">
+
+	{{ if not .Parent.IsHome }}
+		{{ partial "article/navigation.html" . }}
+	{{ end }}
+
+	<article class="post">
+		<h2>{{ .Title }}</h2>
+		{{ partial "article/subtitle.html" .}}
+		<p>
+			{{ .Content }}
+		</p>
+		{{ if and (.IsNode) .Parent.IsHome}}
+			{{ partial "article/previews_list.html" . }}
+		{{ else }}
+
+			{{ if or ( .IsNode ) (not (eq .Parent.CurrentSection  .Parent.FirstSection )) }}	
+				<h3>All articles in series</h3>
+				{{ $currentPage := .}}
+				{{ $s :=  . }}
+				{{ if .IsNode }}
+					{{ $s = .CurrentSection.Pages | append  (slice .) }}
+				{{ else }}
+					{{ $s = .CurrentSection.Pages | append ( slice .Parent) }}
+				{{ end }}
+			
+				{{ with $s }}
+					<ul>
+						{{ range .Reverse}}
+							<li>
+								{{ if ne $currentPage . }}<a href="{{ .Permalink }}">{{ end}}
+								{{ .LinkTitle }}
+								{{ if ne $currentPage . }}</a>{{ end}}
+							</li>
+						{{ end }}
+					</ul>
+				{{ end }}
+			{{ end }} 
+		{{ end }} 
+	</article>
+</main>

@@ -151,8 +151,8 @@ nav.post {
 	display: block;
 	width: 100%;
 	margin: 0px auto;
-	border-bottom: 1px solid #476286;
-	border-top: 1px solid #476286;
+	border-bottom: 2px solid #476286;
+	border-top: 2px solid #476286;
 }
 
 nav.post ul {
@@ -183,13 +183,6 @@ nav.post li.prev a {
 	margin-right:.5em;
 }
 
-
-li.prev-article,
-li.series-prev-chapter,
-li.series-prev-article {
-	text-align: left;
-}
-
 nav.post li.next {
 	text-align: right;
 }
@@ -201,12 +194,6 @@ nav.post li.next a {
 .navlink-next::after{ 
 	content: " »";
 	display: inline-block;
-}
-
-li.next-article,
-li.series-next-chapter,
-li.series-next-article {
-	text-align: right;
 }
 
 .micropost>p {

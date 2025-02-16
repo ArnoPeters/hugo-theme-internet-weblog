@@ -34,7 +34,7 @@
 {{- end }}
    <meta property="og:title" content="{{ .Title }}">
    <meta property="og:url" content="{{ .Permalink }}">
-   <meta property="og:site_name" content="{{ .Site.Title }}">
+   <meta property="og:site/name" content="{{ .Site.Title }}">
 {{- $description:= .Description | default .Summary -}}
 {{- with $description }}
    <meta property="og:description" content="{{ $description }}">
