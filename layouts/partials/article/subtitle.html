@@ -1,9 +1,8 @@
 <div class="postmeta">
 {{ if not .Parent.IsHome }}
-<time datetime="{{ .PublishDate }}" pubdate="">{{ .Date.Format "January 2, 2006"
-	}}</time>
-{{ end }}
-{{ with .Params.Categories -}}
+<time datetime="{{ .PublishDate }}">{{ .Date | time.Format ":date_long" }}</time>
+{{- end -}}
+{{- with .Params.Categories -}}
 in
 	<span class="categories">
 		{{ range $i, $v := . }}
@@ -11,13 +10,12 @@ in
 		$i 1) }}, {{ end }}
 		{{ end -}}
 	</span>
-	{{ end -}}
-	{{ with .Translations -}}
-	<span class="translations">
-		also in
+{{- end -}}
+{{- with .Translations -}}
+	<span class="translations"> [also available in
 		{{ range . -}}
-		<a class="translation" href="{{ .Permalink }}">{{ .Lang }}</a>
-		{{ end -}}
+		<a class="translation" href="{{ .Permalink }}">{{ .Site.Language.LanguageName }}</a>
+		{{- end -}}]
 	</span>
 	{{ end -}}
 </div>
