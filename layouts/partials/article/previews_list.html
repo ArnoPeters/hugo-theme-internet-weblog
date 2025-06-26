@@ -2,6 +2,7 @@
 {{- $pages := where .Site.Pages "Type" "in" (slice "article" ) -}}
 {{- $pages = where $pages "Parent.IsHome" "ne" true -}}
 
+<!-- TODO {{ .Content }} -->
 
 {{ $ran := first 10 $pages }}
 
@@ -15,21 +16,21 @@
 {{- $url := replace .Permalink .Site.BaseURL "" -}}
 
 <article class="post">
-    <h2>
+	<h2>
 
-        {{ with .Parent }}
-        {{ if .Parent }}
-        {{ if not .Parent.IsHome }}
-        <a href="{{ .Permalink }}">{{ .Title }}</a> -
-        {{ end }}
-        {{ end }}
-        {{ end }}
+		{{ with .Parent }}
+		{{ if .Parent }}
+		{{ if not .Parent.IsHome }}
+		<a href="{{ .Permalink }}">{{ .Title }}</a> -
+		{{ end }}
+		{{ end }}
+		{{ end }}
 
 
-        <a href="{{ .Permalink }}">{{ .Title }}</a>
-    </h2>
-    {{- partial "article/preview.html" . -}}
-  
+		<a href="{{ .Permalink }}">{{ .Title }}</a>
+	</h2>
+	{{- partial "article/preview.html" . -}}
+
 </article>
 
 {{- end -}}
