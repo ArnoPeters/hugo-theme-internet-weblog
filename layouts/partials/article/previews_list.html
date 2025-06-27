@@ -2,7 +2,7 @@
 {{- $pages := where .Site.Pages "Type" "in" (slice "article" ) -}}
 {{- $pages = where $pages "Parent.IsHome" "ne" true -}}
 
-<!-- TODO {{ .Content }} -->
+
 
 {{ $ran := first 10 $pages }}
 

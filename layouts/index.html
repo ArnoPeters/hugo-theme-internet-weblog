@@ -1,9 +1,12 @@
 {{ partial "site/header.html" . }}
 {{ partial "page/header.html" . }}
 
-  <main class="content list">
-    {{ partial "article/previews_list.html" . }}
-  </main>
+<main class="content list">
+
+	{{ partial "article/core.html" . }}
+
+	{{ partial "article/previews_list.html" . }}
+</main>
 
 {{ partial "page/footer.html" . }}
 {{ partial "site/footer.html" . }}

@@ -1,0 +1,12 @@
+{{ if .Content }}
+<article class="post">
+	{{ if and (.IsNode) (not .IsHome) }}
+	<h2>{{ .Title }}</h2>
+	{{ partial "article/subtitle.html" .}}
+	{{ end }}
+	<p>
+		{{ .Content }}
+	</p>
+</article>
+
+{{- end }}
